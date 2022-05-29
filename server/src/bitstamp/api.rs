@@ -16,10 +16,15 @@ impl SubscribeRequest {
         Self {
             event: "bts:subscribe".into(),
             data: SubscribeData {
-                channel: format!("order_book_{}", symbol)
-            }
+                channel: format!("order_book_{}", symbol),
+            },
         }
     }
+}
+
+#[derive(Deserialize, Debug)]
+pub struct TraidingPairInfo {
+    pub url_symbol: String,
 }
 
 #[derive(Deserialize, Debug, PartialEq, Clone)]
@@ -39,12 +44,18 @@ pub struct OrderBook {
 }
 
 #[derive(Deserialize, Debug, Clone)]
-pub struct EventMsg {
+pub struct UpdateMsg {
+    pub event: String,
     #[allow(dead_code)]
-    event: String,
-    #[allow(dead_code)]
-    channel: String,
+    pub channel: String,
     pub data: Option<OrderBook>,
+}
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct SubsMsg {
+    pub event: String,
+    #[allow(dead_code)]
+    pub channel: String,
 }
 
 impl OrderBook {

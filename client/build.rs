@@ -3,9 +3,9 @@ fn main() {
         .build_server(true)
         .compile(
             &[
-                "src/proto/orderbook.proto",
+                "../common/proto/orderbook.proto",
             ],
-            &["src/proto/"],
+            &["../common/proto/"],
         )
         .expect("Failed to build direct messages proto/gRPC definition");
 }
